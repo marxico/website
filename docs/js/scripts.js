@@ -48,4 +48,25 @@ window.addEventListener('DOMContentLoaded', event => {
         elements: '#portfolio a.portfolio-box'
     });
 
+    // GET MAIN API STRAPI
+    $.ajax({
+        url: "http://localhost:1337/main",
+        success: function( result ) {
+          $("#main-title").html(result.title);
+          $("#description").html(result.description);
+        }
+      });
+
+    // SEND FORM POST MESSAGES API STRAPI
+    $("#submitButton").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:1337/messages",
+            data: {name: $("#name").val()},
+            success: function( res ){
+                console.log('Mensaje Enviado',res)
+            }
+        });
+    })
+
 });
